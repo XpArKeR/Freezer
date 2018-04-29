@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fridgefx;
+package Freezer;
 
 
 import Parking.Storage.Repository.MySQL.MySQLRepository;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author noldi
  */
-public class FridgeFX extends Application {
+public class Freezer extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {

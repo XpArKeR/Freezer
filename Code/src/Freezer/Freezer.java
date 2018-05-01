@@ -37,21 +37,24 @@ public class Freezer extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {        
         Parking.Base.Storage.GetManager().Add(new MySQLRepository("192.168.1.99", "Freezer", "Freeza", "GetsKilledByTrunks"));
                         
-        if (Parking.Base.Storage.GetOperator().Load()) {
+        if (Parking.Base.Storage.GetOperator().Load()) 
+        {
+            Product testProduct = Parking.Base.Storage.GetOperator().Get("test", Product.class);
             
-            Product testProduct = new Product();
-            testProduct.ID = UUID.randomUUID().toString();
-            testProduct.Reference = "test";
-            testProduct.Amount = 5;
-            testProduct.Description = "Some Description";
-            testProduct.Name = "Test";
-            
-            Parking.Base.Storage.GetOperator().Save(testProduct);
-            
-            Product product = Parking.Base.Storage.GetOperator().Get("test", Product.class);
+            if (testProduct == null)
+            {
+                testProduct = new Product();
+                testProduct.ID = UUID.randomUUID().toString();
+                testProduct.Reference = "test";
+                testProduct.Amount = 5;
+                testProduct.Description = "Herp a Derp";
+                testProduct.Name = "Test";
+
+                Parking.Base.Storage.GetOperator().Save(testProduct);
+            }
             
             launch(args);
         }

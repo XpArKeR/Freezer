@@ -7,7 +7,7 @@ package Freezer;
 
 
 import Parking.Storage.Repository.MySQL.MySQLRepository;
-import Products.Product;
+import Parking.Ontology.Products.Product;
 import java.net.URL;
 import java.util.UUID;
 import javafx.application.Application;
@@ -50,7 +50,7 @@ public class Freezer extends Application {
                 testProduct.ID = UUID.randomUUID().toString();
                 testProduct.Reference = "test";
                 testProduct.Amount = 5;
-                testProduct.Description = "Herp a Derp";
+                testProduct.Description = "Test";
                 testProduct.Name = "Test";
 
                 Parking.Base.Storage.GetOperator().Save(testProduct);

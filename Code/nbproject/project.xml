@@ -39,7 +39,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Parking_Model-1</foreign-project>
+                <foreign-project>Parking_Ontology</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

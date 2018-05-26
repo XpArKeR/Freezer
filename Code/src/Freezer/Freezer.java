@@ -6,6 +6,7 @@
 package Freezer;
 
 
+import Parking.Ontology.Categories.Category;
 import Parking.Storage.Repository.MySQL.MySQLRepository;
 import Parking.Ontology.Products.Product;
 import java.net.URL;
@@ -42,8 +43,20 @@ public class Freezer extends Application {
                         
         if (Parking.Base.Storage.GetOperator().Load()) 
         {
-            Product testProduct = Parking.Base.Storage.GetOperator().Get("test", Product.class);
+            Category testCategory = Parking.Base.Storage.GetOperator().Get("test", Category.class);
             
+            if (testCategory == null)
+            {
+                testCategory = new Category();
+                testCategory.ID = UUID.randomUUID().toString();
+                testCategory.Reference = "test";
+                testCategory.Name = "Test Category";
+                
+                Parking.Base.Storage.GetOperator().Save(testCategory);
+            }
+            
+            Product testProduct = Parking.Base.Storage.GetOperator().Get("test", Product.class);
+                                    
             if (testProduct == null)
             {
                 testProduct = new Product();
@@ -52,6 +65,7 @@ public class Freezer extends Application {
                 testProduct.Amount = 5;
                 testProduct.Description = "Test";
                 testProduct.Name = "Test";
+                testProduct.Category = testCategory;
 
                 Parking.Base.Storage.GetOperator().Save(testProduct);
             }

@@ -7,9 +7,11 @@ package Freezer;
 
 
 import Parking.Ontology.Categories.Category;
+import Parking.Ontology.Optics.Barcode;
 import Parking.Storage.Repository.MySQL.MySQLRepository;
 import Parking.Ontology.Products.Product;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.UUID;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -66,7 +68,31 @@ public class Freezer extends Application {
                 testProduct.Description = "Test";
                 testProduct.Name = "Test";
                 testProduct.Category = testCategory;
+                
+                Parking.Base.Storage.GetOperator().Save(testProduct);
+            }
+            
+            if (testProduct.Codes == null)
+            {
+                testProduct.Codes = new ArrayList<>();
+            }
+            
+            if (testProduct.Codes.isEmpty())
+            {
+                Barcode testBarcode = Parking.Base.Storage.GetOperator().Get("test", Barcode.class);
+                
+                if (testBarcode == null)
+                {
+                    testBarcode = new Barcode();
 
+                    testBarcode.ID = UUID.randomUUID().toString();
+                    testBarcode.Reference = "test";
+                    testBarcode.Code = "test";
+
+                    Parking.Base.Storage.GetOperator().Save(testBarcode);
+                }
+                
+                testProduct.Codes.add(testBarcode);
                 Parking.Base.Storage.GetOperator().Save(testProduct);
             }
             

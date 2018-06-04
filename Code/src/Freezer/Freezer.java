@@ -10,6 +10,7 @@ import Parking.Ontology.Categories.Category;
 import Parking.Ontology.Optics.Barcode;
 import Parking.Storage.Repository.MySQL.MySQLRepository;
 import Parking.Ontology.Products.Product;
+import Parking.Storage.TransactionParameters;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -89,11 +90,16 @@ public class Freezer extends Application {
                     testBarcode.Reference = "test";
                     testBarcode.Code = "test";
 
-                    Parking.Base.Storage.GetOperator().Save(testBarcode);
+                    //Parking.Base.Storage.GetOperator().Save(testBarcode);
                 }
                 
                 testProduct.Codes.add(testBarcode);
-                Parking.Base.Storage.GetOperator().Save(testProduct);
+                
+                TransactionParameters transactionParameters = new TransactionParameters();
+                
+                transactionParameters.IsSavingCascade = true;
+                
+                Parking.Base.Storage.GetOperator().Save(testProduct, transactionParameters);
             }
             
             launch(args);
